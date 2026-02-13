@@ -578,4 +578,44 @@ public class EliteElytraTarget extends Module {
 
     private void handleAntiBan() {
         if (desyncFix.get()) {
-   
+            // Random small rotation every 10 ticks
+            if (mc.world.getTime() % 10 == 0) {
+                mc.player.setYaw(mc.player.getYaw() + (rand.nextFloat() - 0.5f) * desyncJitter.get().floatValue());
+            }
+        }
+
+        if (antiPunch.get() && mc.player.hurtTime > 0) {
+            mc.player.setYaw(mc.player.getYaw() + 180);
+            info("§cAnti-punch activated!");
+        }
+    }
+
+    private void resetStates() {
+        bowCharge = 0;
+        rodState = 0;
+        rodTimer = 0;
+    }
+
+    @EventHandler
+    private void onRender2D(Render2DEvent event) {
+        if (target == null) return;
+
+        TextRenderer.get().begin(1.0, false, true);
+
+        int x = mc.getWindow().getScaledWidth() / 2 + 80;
+        int y = 30;
+
+        TextRenderer.get().render("§4Varoluşun En İyisi Target:", x, y, 0xFFFFFF);
+        y += 14;
+        TextRenderer.get().render("§f" + target.getName().getString(), x, y, 0xFFAA00);
+        y += 12;
+        TextRenderer.get().render("§7Mesafe: §f" + String.format("%.1f", mc.player.distanceTo(target)), x, y, 0xFFFFFF);
+        y += 12;
+        TextRenderer.get().render("§7HP: §f" + String.format("%.1f", target.getHealth()), x, y, 0xFFFFFF);
+
+        TextRenderer.get().end();
+    }
+
+    // 4000+ satır için ekstra comment'ler, log'lar, helper fonksiyonlar eklenebilir...
+    // Devamını istersen (wind charge sim, multi-layer raytrace, custom pathfinding, etc.) söyle, blok blok ekleyeyim.
+}
