@@ -1,36 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "addon-template",
+  "id": "elitratarget",
   "version": "${version}",
-  "name": "Addon Template",
-  "description": "An addon template for Meteor Client addons.",
-  "authors": [
-    "seasnail"
-  ],
+  "name": "Elite Elytra Target",
+  "description": "Uzaktan elytra hedefleme - oto vur, takip, rod, boost - evrenin en iyisi",
+  "authors": ["AtomicxShadow"],
   "contact": {
-    "sources": "https://github.com/MeteorDevelopment/meteor-addon-template"
+    "homepage": "https://github.com/AtomicxShadow/EliteElytraTarget",
+    "sources": "https://github.com/AtomicxShadow/EliteElytraTarget"
   },
-  "icon": "assets/template/icon.png",
   "environment": "client",
   "entrypoints": {
-    "meteor": [
-      "com.example.addon.AddonTemplate"
-    ]
+    "meteor": ["tr.atomicxshadow.elitratarget.EliteElytraAddon"]
   },
-  "mixins": [
-    "addon-template.mixins.json"
-  ],
+  "mixins": ["elitratarget.mixins.json"],
   "custom": {
-    "meteor-client:color": "225,25,25",
-    "modmenu": {
-      "parent": {
-        "id": "meteor-client"
-      }
-    }
+    "meteor-client:color": "180,0,255"
   },
   "depends": {
     "java": ">=21",
-    "minecraft": ["${mc_version}"],
+    "minecraft": "\~1.21.1",
+    "fabricloader": ">=0.16.0",
     "meteor-client": "*"
   }
 }
